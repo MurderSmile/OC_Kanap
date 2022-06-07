@@ -1,9 +1,9 @@
-//  Affichage des Articles sur la page index.html  //
+//  Affichage des Articles dans la page index.html  //
 presentation()
     
 async function presentation(){
 
-  //  Récupération  de la réponse de l'api par article se trouvant dans le localStorage  //
+  //  Récupération des éléments de chaque article se trouvant dans l'api  //
   let articlesJson = await get().then(response => response)
   for(article of articlesJson){
 
@@ -11,6 +11,7 @@ async function presentation(){
   }
     
 }
+
 
 //  Récupération des articles dans l'api  //
 function get(){
@@ -23,8 +24,9 @@ function get(){
     return articlesJson
   })
 
-  .catch(err => {
-    console.log(err)
+  .catch(error => {
+    console.log(error)
     alert("404")
   })
+
 } 
