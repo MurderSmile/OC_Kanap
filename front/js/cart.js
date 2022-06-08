@@ -382,8 +382,6 @@ if(local){
 //  Validation du formulaire  //
   order.addEventListener("click", function(e){
 
-    e.preventDefault()
-
     if(!local || local == ""){
 
       alert("Aucun article ne se trouve dans votre Panier")
@@ -392,6 +390,8 @@ if(local){
 
     else if(validityFirstName == true && validityLastName == true && validityAddress == true && validityCity == true && validityEmail == true){
       
+      e.preventDefault()
+
       let tabProducts = []
       for(localCommande of local){
         tabProducts.push(localCommande.idCommande)
