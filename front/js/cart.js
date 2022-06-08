@@ -382,22 +382,21 @@ if(local){
 //  Validation du formulaire  //
   order.addEventListener("click", function(e){
 
+    //  Empêche le rafraichissement de la page en cas d'erreur dans le formulaire  //
+    if(reponseFirstName != "" && reponseLastName != "" && reponseAddress != "" && reponseCity != "" && reponseEmail != ""){
+      e.preventDefault()
+    }
+
     if(!local || local == ""){
 
       alert("Aucun article ne se trouve dans votre Panier")
 
     }
 
-    //  Empêche le rafraichissement de la page en cas d'erreur dans le formulaire  //
-    else if(validityFirstName == false && reponseFirstName != "" || validityLastName == false && reponseLastName != "" || validityAddress == false && reponseAddress != "" || validityCity == false && reponseCity != "" || validityEmail == false && reponseEmail != ""){
-      e.preventDefault()
-    }
-
     else if(validityFirstName == true && validityLastName == true && validityAddress == true && validityCity == true && validityEmail == true){
       
-      e.preventDefault()
-
       let tabProducts = []
+      
       for(localCommande of local){
         tabProducts.push(localCommande.idCommande)
       }
