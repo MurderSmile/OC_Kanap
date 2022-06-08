@@ -382,7 +382,7 @@ if(local){
 //  Validation du formulaire  //
   order.addEventListener("click", function(e){
 
-    //  Empêche le rafraichissement de la page en cas d'erreur dans le formulaire  //
+    //  Empêche le rafraichissement de la page  //
     if(reponseFirstName != "" && reponseLastName != "" && reponseAddress != "" && reponseCity != "" && reponseEmail != ""){
       e.preventDefault()
     }
@@ -396,7 +396,7 @@ if(local){
     else if(validityFirstName == true && validityLastName == true && validityAddress == true && validityCity == true && validityEmail == true){
       
       let tabProducts = []
-      
+
       for(localCommande of local){
         tabProducts.push(localCommande.idCommande)
       }
