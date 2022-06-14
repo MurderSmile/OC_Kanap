@@ -46,7 +46,37 @@ if(local){
       //  Récupération  de la réponse de l'api par article se trouvant dans le localStorage  //
       let articleJson = await get(i).then(response => response)
 
-      document.getElementById("cart__items").innerHTML += "<article class='cart__item' data-id= "+local[i].idCommande+" data-color="+local[i].colorCommande+"><div class='cart__item__img'><img src="+articleJson.imageUrl+" alt="+articleJson.altTxt+"></div><div class='cart__item__content'><div class='cart__item__content__description'><h2>"+articleJson.name+"</h2><p>"+local[i].colorCommande+"</p><p>"+articleJson.price+" €</p></div><div class='cart__item__content__settings'><div class='cart__item__content__settings__quantity'><p>Qté : </p><input type='number' class='itemQuantity' name='itemQuantity' min='1' max='100' value="+local[i].quantityCommande+"></div><div class='cart__item__content__settings__delete'><p class='deleteItem'>Supprimer</p></div></div></div></article>" 
+      document.getElementById("cart__items").innerHTML += 
+      `<article class='cart__item' data-id= ${local[i].idCommande} data-color= ${local[i].colorCommande} >
+        
+        <div class='cart__item__img'>
+          <img src= ${articleJson.imageUrl} alt= ${articleJson.altTxt} >
+        </div>
+
+        <div class='cart__item__content'>
+
+          <div class='cart__item__content__description'>
+            <h2> ${articleJson.name} </h2>
+            <p> ${local[i].colorCommande} </p>
+            <p> ${articleJson.price} €</p>
+          </div>
+
+          <div class='cart__item__content__settings'>
+
+            <div class='cart__item__content__settings__quantity'>
+              <p>Qté : </p>
+              <input type='number' class='itemQuantity' name='itemQuantity' min='1' max='100' value= ${local[i].quantityCommande} >
+            </div>
+
+            <div class='cart__item__content__settings__delete'>
+              <p class='deleteItem'>Supprimer</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>`
     
     } 
     //  Affichage de la Quantité Total  //
@@ -64,7 +94,7 @@ if(local){
   //  Récupération  de la réponse de l'api par article se trouvant dans le localStorage  //
   function get(i){
 
-    return fetch("http://localhost:3000/api/products/"+local[i].idCommande+"")
+    return fetch(`http://localhost:3000/api/products/${local[i].idCommande}`)
 
     .then(res => res.json())
 
@@ -86,6 +116,7 @@ if(local){
     for(let i in local){
    
       quantityArticles.push(local[i].quantityCommande - '' )
+
       let totalQuantityArticles = quantityArticles.reduce((previousValue, currentValue) => previousValue += currentValue, 0)
       document.getElementById("totalQuantity").innerText = totalQuantityArticles
 
@@ -107,9 +138,18 @@ if(local){
 
     itemQuantity[i].addEventListener("input", function(e){
 
+      if(e.target.value > 100){
+        e.target.value = 100
+      }
+
+      if(e.target.value < 1){
+        e.target.value = 1
+      }
+
       quantityArticles[i] = e.target.value - ''
       let totalQuantityArticles = quantityArticles.reduce((previousValue, currentValue) => previousValue += currentValue, 0)
       document.getElementById("totalQuantity").innerText = totalQuantityArticles
+      
 
     })
 
@@ -176,7 +216,7 @@ if(local){
 
       deleteItem[i].addEventListener("click", function(){
 
-        if (confirm("Voulez-vous vraiment supprimer le(s) canapé(s): "+articleJson.name+" de COULEUR: "+local[i].colorCommande+" ?") == true) {
+        if (confirm(`Voulez-vous vraiment supprimer le(s) canapé(s): ${articleJson.name} de COULEUR: ${local[i].colorCommande} ?`) == true) {
 
           local.splice(i, 1)
           localStorage.setItem("commande",JSON.stringify(local))

@@ -1,13 +1,26 @@
 //  Affichage des Articles dans la page index.html  //
 presentation()
-    
+
 async function presentation(){
 
   //  Récupération des éléments de chaque article se trouvant dans l'api  //
   let articlesJson = await get().then(response => response)
   for(article of articlesJson){
 
-    document.getElementById("items").innerHTML += "<a href='./product.html?id="+article._id+"'><article><img src="+article.imageUrl+" alt="+article.altTxt+"><h3 class='productName'>"+article.name+"</h3><p class='productDescription'>"+article.description+"</p></article></a>";
+    document.getElementById("items").innerHTML += 
+
+      `<a href='./product.html?id= ${article._id} '>
+
+       <article>
+
+         <img src= ${article.imageUrl} alt= ${article.altTxt} >
+         <h3 class='productName'> ${article.name} </h3>
+         <p class='productDescription'> ${article.description} </p>
+
+       </article>
+       
+      </a>`;
+
   }
     
 }
