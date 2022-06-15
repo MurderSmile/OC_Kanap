@@ -465,7 +465,7 @@ if(local){
 
     .then(resJson => {
       sessionStorage.setItem("confirmation",JSON.stringify(resJson.orderId))
-      window.location.href = "/front/html/confirmation.html"
+      window.location.href = "./confirmation.html"
     })
 
     .catch(error => {
