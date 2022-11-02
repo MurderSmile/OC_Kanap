@@ -9,8 +9,8 @@
 
 ## Prérequis
 
-Vous devrez installer Node et ‘npm’ localement sur votre machine.
-Vous devrez également installer l'extension 'live server'.
+  * Vous devrez installer Node et ‘npm’ localement sur votre machine.
+  * Vous devrez également installer l'extension 'live server'.
 
 ## Pour lancer le projet:
 
